@@ -1,11 +1,11 @@
-FROM java:8
+FROM java:8-jre
 
-WORKDIR /data
+COPY hello-world.yml /opt/dropwizard/
+COPY target/hello-world-dw-ws-0.0.1-SNAPSHOT.jar /opt/dropwizard/
 
-ADD /target/hello-world-dw-ws-0.0.1-SNAPSHOT.jar /data/hello-world-dw-ws-0.0.1-SNAPSHOT.jar
+EXPOSE 9000
+EXPOSE 9001
 
-ADD hello-world.yml /data/hello-world.yml
+WORKDIR /opt/dropwizard
 
-CMD java -jar hello-world-dw-ws-0.0.1-SNAPSHOT.jar server hello-world.yml
-
-EXPOSE 8080
+CMD ["java", "-jar", "-Done-jar.silent=true", "hello-world-dw-ws-0.0.1-SNAPSHOT.jar", "server", "hello-world.yml"]

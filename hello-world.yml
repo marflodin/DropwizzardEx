@@ -8,3 +8,15 @@ server:
   adminConnectors:
   - type: http
     port: 9001
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: /var/log/hello-world.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: /var/log/hello-world-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
+      logFormat: # TODO
