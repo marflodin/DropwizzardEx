@@ -3,20 +3,22 @@ instance: localhost
 
 server:
   applicationConnectors:
-  - type: http
-    port: 9000
-  adminConnectors:
-  - type: http
-    port: 9001
+    - type: http
+      port: 0
 
+  adminConnectors:
+    - type: http
+      port: 0
+
+# Logging settings.
 logging:
   level: INFO
   appenders:
     - type: file
-      currentLogFilename: /var/log/hello-world.log
+      currentLogFilename: /tmp/log/hello-world.log
       threshold: ALL
       archive: true
-      archivedLogFilenamePattern: /var/log/hello-world-%d.log
+      archivedLogFilenamePattern: /tmp/log/hello-world-%d.log
       archivedFileCount: 5
       timeZone: UTC
       logFormat: # TODO
