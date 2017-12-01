@@ -4,6 +4,7 @@ import com.marflo.dw.ws.helloworld.helpers.TestClusterRule;
 import com.marflo.dw.ws.helloworld.resources.ValueResponse;
 import org.hamcrest.Matchers;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
@@ -23,6 +24,7 @@ public class ApplicationTest {
 
     private final Client client = ClientBuilder.newClient();
 
+    @Ignore
     @Test
     public void shouldRespondNotFoundForUnknownKeys() {
         final Response response = client
@@ -32,6 +34,7 @@ public class ApplicationTest {
         assertThat(response, hasStatus(Response.Status.NOT_FOUND));
     }
 
+    @Ignore
     @Test
     public void shouldRespondWithKnownKeys() {
         String key = "key";

@@ -2,6 +2,7 @@ package com.marflo.dw.ws.helloworld;
 
 import com.marflo.dw.ws.helloworld.helpers.TestClusterRule;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
@@ -19,6 +20,7 @@ public class HealthChecksTest {
 
     private final Client client = ClientBuilder.newClient();
 
+    @Ignore
     @Test
     public void shouldBeHealthy() {
         final Response response = client
