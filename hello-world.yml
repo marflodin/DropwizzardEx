@@ -13,10 +13,10 @@ logging:
   level: INFO
   appenders:
     - type: file
+      queueSize: 2048
+      threshold: INFO
       currentLogFilename: /var/log/hello-world.log
-      threshold: ALL
-      archive: true
       archivedLogFilenamePattern: /var/log/hello-world-%d.log
+      archive: true
       archivedFileCount: 5
-      timeZone: UTC
-      logFormat: # TODO
+      maxFileSize: 128MB
