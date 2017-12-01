@@ -38,4 +38,6 @@
 > docker run -d -p 6379:6379 redis:4.0.4
 * Start application with `config-local.yml`
 
-
+### Run redis in kubernetes
+[Readme To setup redis in kubernetes](https://github.com/kubernetes/examples/blob/master/staging/storage/redis/README.md) 
+> 
