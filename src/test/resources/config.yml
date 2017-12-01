@@ -9,6 +9,9 @@ server:
   - type: http
     port: 10001
 
+swagger:
+    resourcePackage: com.marflo.dw.ws.helloworld.resources
+
 logging:
   level: INFO
   appenders:
