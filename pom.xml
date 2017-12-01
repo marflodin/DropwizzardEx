@@ -103,7 +103,7 @@
                                 <transformers>
                                     <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                     <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                        <mainClass>com.marflo.dw.ws.helloworld.api.application.HelloWorldApplication</mainClass>
+                                        <mainClass>com.marflo.dw.ws.helloworld.application.HelloWorldApplication</mainClass>
                                     </transformer>
                                 </transformers>
                             </configuration>

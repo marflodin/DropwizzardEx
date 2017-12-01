@@ -16,7 +16,7 @@ logging:
       queueSize: 2048
       threshold: INFO
       currentLogFilename: /var/log/hello-world.log
-      archivedLogFilenamePattern: /var/log/hello-world-%d.log
+      archivedLogFilenamePattern: /var/log/hello-world-%i.log
       archive: true
       archivedFileCount: 5
       maxFileSize: 128MB
