@@ -3,22 +3,20 @@ instance: localhost
 
 server:
   applicationConnectors:
-    - type: http
-      port: 0
-
+  - type: http
+    port: 10000
   adminConnectors:
-    - type: http
-      port: 0
+  - type: http
+    port: 10001
 
-# Logging settings.
 logging:
   level: INFO
   appenders:
     - type: file
-      currentLogFilename: /tmp/log/hello-world.log
-      threshold: ALL
+      queueSize: 2048
+      threshold: INFO
+      currentLogFilename: /tmp/var/log/hello-world.log
+      archivedLogFilenamePattern: /tmp/var/log/hello-world-%i.log
       archive: true
-      archivedLogFilenamePattern: /tmp/log/hello-world-%d.log
       archivedFileCount: 5
-      timeZone: UTC
-      logFormat: # TODO
+      maxFileSize: 128MB
