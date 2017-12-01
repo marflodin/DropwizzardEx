@@ -22,7 +22,7 @@ public class TestClusterRule implements TestRule {
 
     private DropwizardAppRule<HelloWorldConfiguration> createDropwizardAppRule(int appPort) {
         return new DropwizardAppRule<>(HelloWorldApplication.class,
-                resourceFilePath("config.yml"),
+                resourceFilePath("config-local.yml"),
                 config("server.applicationConnectors[0].port", Integer.toString(appPort))
         );
      }
