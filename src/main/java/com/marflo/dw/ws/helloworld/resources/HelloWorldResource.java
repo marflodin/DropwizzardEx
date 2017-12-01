@@ -12,8 +12,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import java.util.HashMap;
-
 import static javax.servlet.http.HttpServletResponse.*;
 
 @Path("/hello-world")
@@ -55,7 +53,7 @@ public class HelloWorldResource {
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An error has occurred"),
             @ApiResponse(code = SC_SERVICE_UNAVAILABLE, message = "Temporarily unavailable")
     })
-    public Response get(@PathParam("key") String key, @QueryParam("value") String value) {
+    public Response get(@PathParam("key") String key, String value) {
         LOG.info("Store value {} for key {}", value, key);
         stateStore.put(key, value);
         return Response.accepted().build();

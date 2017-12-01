@@ -1,11 +1,14 @@
 package com.marflo.dw.ws.helloworld;
 
 import com.marflo.dw.ws.helloworld.helpers.TestClusterRule;
+import com.marflo.dw.ws.helloworld.resources.ValueResponse;
+import org.hamcrest.Matchers;
 import org.junit.ClassRule;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
@@ -21,11 +24,29 @@ public class ApplicationTest {
     private final Client client = ClientBuilder.newClient();
 
     @Test
-    public void shouldRespondHelloOnRequest() {
+    public void shouldRespondNotFoundForUnknownKeys() {
         final Response response = client
                 .target(APP.hello())
+                .path("test")
+                .request().get();
+        assertThat(response, hasStatus(Response.Status.NOT_FOUND));
+    }
+
+    @Test
+    public void shouldRespondWithKnownKeys() {
+        String key = "key";
+        String value = "value";
+        final Response responsePut = client
+                .target(APP.hello())
+                .path(key)
+                .request().put(Entity.json(value));
+        assertThat(responsePut, hasStatus(Response.Status.ACCEPTED));
+
+        final Response response = client
+                .target(APP.hello())
+                .path(key)
                 .request().get();
         assertThat(response, hasStatus(Response.Status.OK));
-        assertThat(response, hasEntity(String.class, hasJsonPath("$.message", equalTo("hello world"))));
+        assertThat(response, hasEntity(String.class, hasJsonPath("$.value", Matchers.equalTo(value))));
     }
 }
