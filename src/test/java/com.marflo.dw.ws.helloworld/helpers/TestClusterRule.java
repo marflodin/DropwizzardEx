@@ -17,13 +17,14 @@ public class TestClusterRule implements TestRule {
     private final DropwizardAppRule<HelloWorldConfiguration> app;
 
     public TestClusterRule() {
-        app = createDropwizardAppRule(findRandomFreePort());
+        app = createDropwizardAppRule(findRandomFreePort(), findRandomFreePort());
     }
 
-    private DropwizardAppRule<HelloWorldConfiguration> createDropwizardAppRule(int appPort) {
+    private DropwizardAppRule<HelloWorldConfiguration> createDropwizardAppRule(int appPort, int adminPort) {
         return new DropwizardAppRule<>(HelloWorldApplication.class,
                 resourceFilePath("config-local.yml"),
-                config("server.applicationConnectors[0].port", Integer.toString(appPort))
+                config("server.applicationConnectors[0].port", Integer.toString(appPort)),
+                config("server.adminConnectors[0].port", Integer.toString(adminPort))
         );
      }
 

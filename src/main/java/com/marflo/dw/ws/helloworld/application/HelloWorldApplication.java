@@ -1,5 +1,7 @@
 package com.marflo.dw.ws.helloworld.application;
 
+import com.bendb.dropwizard.redis.JedisBundle;
+import com.bendb.dropwizard.redis.JedisFactory;
 import com.marflo.dw.ws.helloworld.configuration.HelloWorldConfiguration;
 import com.marflo.dw.ws.helloworld.healthcheck.TemplateHealthCheck;
 import com.marflo.dw.ws.helloworld.resources.HelloWorldResource;
@@ -18,12 +20,18 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
         initializeSwagger(bootstrap);
+        bootstrap.addBundle(new JedisBundle<HelloWorldConfiguration>() {
+            @Override
+            public JedisFactory getJedisFactory(HelloWorldConfiguration configuration) {
+                return configuration.redis;
+            }
+        });
     }
 
     @Override
     public void run(HelloWorldConfiguration configuration,
                     Environment environment) {
-        StateStore stateStore = new StateStore();
+        StateStore stateStore = new StateStore(configuration.redis, environment);
         environment.healthChecks().register("template", new TemplateHealthCheck());
         environment.jersey().register(new HelloWorldResource(stateStore));
     }

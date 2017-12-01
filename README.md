@@ -30,3 +30,12 @@
 > kubectl set image deployment/dropwizard-api marflo/dropwizard-ex:1.0.1
 
 ### Kubernetes commands
+
+
+### Run locally with redis
+* Start a local redis
+> docker pull redis:4.0.4
+> docker run -d -p 6379:6379 redis:4.0.4
+* Start application with `config-local.yml`
+
+
